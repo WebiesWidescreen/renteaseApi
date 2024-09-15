@@ -20,29 +20,25 @@ class LoginComponent
             //Decode Token End
 
             // PRODUCT TRANSACTION STATUS CHECK
-            $queryUserList = "SELECT tblU.userID, tblU.userName, tblU.phoneNumber, tblU.mailID FROM tblUser tblU WHERE tblU.phoneNumber = '$decodeVal->PhoneNumber' AND tblU.isActive = 1";
+            $queryUserList = "SELECT tblU.userID, tblU.userName, tblU.userPhone FROM tbl_user tblU WHERE tblU.userPhone = '$decodeVal->PhoneNumber' AND tblU.isActive = 1";
             $rsdUserList = mysqli_query($connect_read_var, $queryUserList);
             $userExist = 0;
             while ($rsUserList = mysqli_fetch_assoc($rsdUserList)) {
                 $userID = $rsUserList['userID'];
-                $userName = $rsUserList['userName'];
-                $phoneNumber = $rsUserList['phoneNumber'];
-                $mailID = $rsUserList['mailID'];
+                $phoneNumber = $rsUserList['userPhone'];
                 $userExist++;
             }
 
             if ($userExist == 0) {
-                $queryCreateUser = "INSERT INTO tblUser(userName, phoneNumber, mailID) VALUES ('$decodeVal->UserName', '$decodeVal->PhoneNumber', '$decodeVal->Email')";
+                $queryCreateUser = "INSERT INTO tbl_user(userPhone, userPassword, createdOn) VALUES ('$decodeVal->PhoneNumber', '$decodeVal->UserPassword', NOW())";
                 $rsd = mysqli_query($connect_var, $queryCreateUser);
                 $lastInsertUserID =  mysqli_insert_id($connect_var);
 
                 $userID = $lastInsertUserID;
-                $userName = $decodeVal->UserName;
                 $phoneNumber = $decodeVal->PhoneNumber;
-                $mailID = $decodeVal->Email;
             }
 
-            if ($rsd && $userExist == 0) {
+            if ($userExist == 0) {
                 $responseCode = "01";
                 $responseMessage = 'Success';
             } else if ($userExist > 0) {
@@ -61,7 +57,7 @@ class LoginComponent
             mysqli_close($connect_read_var); //Read Connection Close
             mysqli_close($connect_var); //Write Connection Close
 
-            echo json_encode(array("statusCode" => $responseCode, "response" => $encodeToken, "UserID" => $userID, "UserName" => $userName, "PhoneNumber" => $phoneNumber, "MailID" => $mailID)); //Return Response
+            echo json_encode(array("statusCode" => $responseCode, "response" => $encodeToken)); //Return Response
 
         } catch (PDOException $e) {
             echo json_encode(array("status" => "errors", "message_text" => $e->getMessage()), JSON_FORCE_OBJECT);

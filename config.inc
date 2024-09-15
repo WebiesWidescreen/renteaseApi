@@ -1,11 +1,6 @@
 <?php
-    // $hostname = 'srv1190.hstgr.io';
-    // $dbname   = 'u437965069_hackertest';
-    // $username = 'u437965069_hacker';
-    // $password = 'IUjV533Tb2'; 
-    
     $hostname = 'localhost'; 
-    $dbname = 'scrab'; 
+    $dbname = 'rentease'; 
     $username = 'root';
     $password = 'root';
 
