@@ -219,7 +219,7 @@ class PropertyComponent
             }
 
 
-            if ($rsd) {
+            if ($count > 0) {
                 $responseCode = "01";
                 $responseMessage = 'Success';
             }
@@ -420,7 +420,7 @@ class PropertyComponent
             }
 
 
-            if ($rsd) {
+            if ($count > 0) {
                 $responseCode = "01";
                 $responseMessage = 'Success';
             }
