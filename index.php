@@ -30,6 +30,10 @@ require 'Login/LoginComponent.php';
 require 'Dashboard/DashboardRouter.php';
 require 'Dashboard/DashboardComponent.php';
 
+/****** PROPERTY COMPONENET  *****/
+require 'Property/PropertyRouter.php';
+require 'Property/PropertyComponent.php';
+
 
 $f3->route(
     'GET /',
